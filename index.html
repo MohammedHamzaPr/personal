@@ -252,22 +252,6 @@
             <div class="arrow-icon"><i class="fas fa-arrow-left"></i></div>
         </a>
 
-        <a href="https://mohammedhamzapr.github.io/progrmming-security/" class="social-link link-website" target="_blank" rel="noopener noreferrer">
-            <div class="link-left">
-                <i class="fas fa-laptop-code"></i>
-                <span class="platform-name">كورس Programming Security</span>
-            </div>
-            <div class="arrow-icon"><i class="fas fa-arrow-left"></i></div>
-        </a>
-
-        <a href="https://www.youtube.com/@lw_w3" class="social-link link-youtube" target="_blank" rel="noopener noreferrer">
-            <div class="link-left">
-                <i class="fab fa-youtube"></i>
-                <span class="platform-name">يوتيوب</span>
-            </div>
-            <div class="arrow-icon"><i class="fas fa-arrow-left"></i></div>
-        </a>
-
         <a href="https://t.me/lw_w7" class="social-link link-telegram-acc" target="_blank" rel="noopener noreferrer">
             <div class="link-left">
                 <i class="fab fa-telegram-plane"></i>
@@ -295,85 +279,87 @@
     </div>
 </div>
 
+<div class="extra-links" id="extraLinksContainer"></div>
+
+<style>
+.extra-links{
+    margin-top: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+</style>
+
 <script>
-    const extraContainer = document.getElementById('extraLinksContainer');
-    
-    const extraLinksArray = [
-        {
-            name: "GitHub (مشاريعي)",
-            iconClass: "fab fa-github",
-            url: "https://github.com/mohammedhamzapr",
-            customColor: "#f0f6fc"
-        }
-    ];
-    
-    function createExtraLink(linkData) {
-        const anchor = document.createElement('a');
-        anchor.className = `social-link`;
-        anchor.href = linkData.url;
-        anchor.target = "_blank";
-        anchor.rel = "noopener noreferrer";
-        anchor.style.border = "1px solid #2e4a7a";
-        
-        const leftDiv = document.createElement('div');
-        leftDiv.className = "link-left";
-        
-        const icon = document.createElement('i');
-        icon.className = linkData.iconClass;
-        if (linkData.customColor) {
-            icon.style.color = linkData.customColor;
-        } else {
-            icon.style.color = "#b9d0ff";
-        }
-        
-        const nameSpan = document.createElement('span');
-        nameSpan.className = "platform-name";
-        nameSpan.innerText = linkData.name;
-        
-        leftDiv.appendChild(icon);
-        leftDiv.appendChild(nameSpan);
-        
-        const arrowDiv = document.createElement('div');
-        arrowDiv.className = "arrow-icon";
-        arrowDiv.innerHTML = '<i class="fas fa-arrow-left"></i>';
-        
-        anchor.appendChild(leftDiv);
-        anchor.appendChild(arrowDiv);
-        
-        if (linkData.isPlaceholder || linkData.url === "https://twitter.com/" || linkData.url === "https://www.linkedin.com/in/") {
-            anchor.addEventListener('click', (e) => {
-                e.preventDefault();
-                alert(`🔗 رابط ${linkData.name} لم يتم تعيينه بعد. يرجى تحديث الرابط في قسم extraLinksArray داخل الكود.`);
-            });
-        }
-        return anchor;
+const extraContainer = document.getElementById('extraLinksContainer');
+
+const extraLinksArray = [
+    {
+        name: "GitHub (مشاريعي)",
+        iconClass: "fab fa-github",
+        url: "https://github.com/mohammedhamzapr",
+        customColor: "#f0f6fc"
+    },
+    {
+        name: "قناة اليوتيوب",
+        iconClass: "fab fa-youtube",
+        url: "https://www.youtube.com/@lw_w3",
+        customColor: "#ff3e3e"
+    },
+    {
+        name: "كورس Programming & Security",
+        iconClass: "fas fa-laptop-code",
+        url: "https://mohammedhamzapr.github.io/progrmming-security/",
+        customColor: "#ff3e3e"
     }
-    
-    if (extraContainer) {
-        extraContainer.innerHTML = '';
-        const subtitle = document.createElement('div');
-        subtitle.className = "section-mini-title";
-        subtitle.innerHTML = '<i class="fas fa-plus-circle"></i> <span>منصات أخرى</span> <i class="fas fa-share-alt" style="font-size:10px;"></i>';
-        extraContainer.appendChild(subtitle);
-        
-        extraLinksArray.forEach(item => {
-            const linkNode = createExtraLink(item);
-            extraContainer.appendChild(linkNode);
-        });
-        
-    }
-    
-    const mainLinks = document.querySelectorAll('.links-container .social-link');
-    mainLinks.forEach(link => {
-        if (!link.href || link.href === "#" || link.href === "" || link.href.endsWith("#")) {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                alert("يرجى تحديث الرابط في كود HTML بشكل صحيح.");
-            });
-        }
+];
+
+function createExtraLink(linkData) {
+    const anchor = document.createElement('a');
+    anchor.className = 'social-link';
+    anchor.href = linkData.url;
+    anchor.target = "_blank";
+    anchor.rel = "noopener noreferrer";
+    anchor.style.border = "1px solid #2e4a7a";
+
+    const leftDiv = document.createElement('div');
+    leftDiv.className = "link-left";
+
+    const icon = document.createElement('i');
+    icon.className = linkData.iconClass;
+    icon.style.color = linkData.customColor || "#b9d0ff";
+
+    const nameSpan = document.createElement('span');
+    nameSpan.className = "platform-name";
+    nameSpan.innerText = linkData.name;
+
+    leftDiv.appendChild(icon);
+    leftDiv.appendChild(nameSpan);
+
+    const arrowDiv = document.createElement('div');
+    arrowDiv.className = "arrow-icon";
+    arrowDiv.innerHTML = '<i class="fas fa-arrow-left"></i>';
+
+    anchor.appendChild(leftDiv);
+    anchor.appendChild(arrowDiv);
+
+    return anchor;
+}
+
+if (extraContainer) {
+    extraContainer.innerHTML = '';
+
+    const subtitle = document.createElement('div');
+    subtitle.className = "section-mini-title";
+    subtitle.innerHTML =
+        '<i class="fas fa-plus-circle"></i> <span>منصات أخرى</span> <i class="fas fa-share-alt" style="font-size:10px;"></i>';
+
+    extraContainer.appendChild(subtitle);
+
+    extraLinksArray.forEach(item => {
+        extraContainer.appendChild(createExtraLink(item));
     });
-    
-    console.log("✅ تم تحديث الصفحة بإضافة اللوجو من src/logo.jpg وكل الروابط الخاصة بك (TikTok, Instagram, YouTube, Telegram Account, Telegram Group, موقع الكورس).");
+}
 </script>
 
 </body>
